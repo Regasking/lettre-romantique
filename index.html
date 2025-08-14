@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une lettre pour toi ❤</title>
+    <link rel="icon" href="https://emojiapi.dev/api/v1/2764.svg"> <!-- Icône cœur -->
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to bottom, #fff0f0, #ffeaea);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Cœurs animés */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('https://emojiapi.dev/api/v1/2764.svg') no-repeat center;
+            background-size: contain;
+            animation: float 6s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        #envelope {
+            width: 200px;
+            height: 120px;
+            background: white;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            animation: heartbeat 1.5s infinite;
+            z-index: 2;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        #envelope:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 60px solid #f8f8f8;
+            transition: transform 1s ease;
+        }
+
+        #letter {
+            position: absolute;
+            width: 220px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+            z-index: 1;
+        }
+
+        .open #envelope {
+            opacity: 0;
+        }
+
+        .open #envelope:before {
+            transform: rotateX(180deg);
+        }
+
+        .open #letter {
+            opacity: 1;
+            transform: translateY(-60px);
+        }
+
+        .poem-line {
+            margin: 8px 0;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .poem-line:nth-child(1) { animation-delay: 0.5s; }
+        .poem-line:nth-child(2) { animation-delay: 1s; }
+        .poem-line:nth-child(3) { animation-delay: 1.5s; }
+        .poem-line:nth-child(4) { animation-delay: 2s; }
+        .poem-line:nth-child(5) { animation-delay: 2.5s; }
+        .poem-line:nth-child(6) { animation-delay: 3s; }
+        .poem-line:nth-child(7) { animation-delay: 3.5s; }
+        .poem-line:nth-child(8) { animation-delay: 4s; }
+        .poem-line:nth-child(9) { animation-delay: 4.5s; }
+        .poem-line:nth-child(10) { animation-delay: 5s; }
+        .poem-line:nth-child(11) { animation-delay: 5.5s; }
+        .poem-line:nth-child(12) { animation-delay: 6s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        #recipient {
+           ;
+            color: #d48a8a;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        #signature {
+            text-align: right;
+            font-family: 'Brush Script MT';
+            margin-top: 15px;
+            color: #888;
+        }
+
+        #replay {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #replay button {
+            padding: 8px 16px;
+            font-size: 14px;
+            border: none;
+            background-color: #d48a8a;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            #letter {
+                width: 90%;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cœurs animés -->
+    <div class="heart" style="left:10%; animation-delay:0s;"></div>
+    <div class="heart" style="left:30%; animation-delay:2s;"></div>
+    <div class="heart" style="left:50%; animation-delay:1s;"></div>
+    <div class="heart" style="left:70%; animation-delay:3s;"></div>
+    <div class="heart" style="left:90%; animation-delay:1.5s;"></div>
+
+    <div id="envelope" title="Clique pour ouvrir 💌"></div>
+
+    <div id="letter">
+        <div id="recipient">Pour toi, mon amour</div>
+
+        <div class="poem-line">Quand la vie est un vent qui sème le trouble,</div>
+        <div class="poem-line">Ton regard est un port où je me sens paisible.</div>
+        <div class="poem-line">Tu es cette partie de moi qui ne ment jamais,</div>
+        <div class="poem-line">Un roc sur lequel je peux tout déposer.</div>
+        <div class="poem-line">Je te regarde et je sais que je suis chez moi,</div>
+        <div class="poem-line">Ma moitié de cœur, mon autre part de joie.</div>
+        <div class="poem-line">Le temps passe et les saisons se succèdent,</div>
+        <div class="poem-line">Mais notre histoire est un livre qui n'a pas de fin.</div>
+        <div class="poem-line">Tu es cette ancre solide, qui me tient dans la tempête,</div>
+        <div class="poem-line">Une main qui se tend, quand le monde s'arrête.</div>
+        <div class="poem-line">Avec toi, je me sens complet, une âme en harmonie,</div>
+        <div class="poem-line">Tu es mon guide, ma moitié d'une même vie.</div>
+
+        <div id="signature">Regas_king</div>
+
+        <div id="replay">
+            <button onclick="location.reload()">Rejouer 💌</button>
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.body.classList.add('open');
+            envelope.onclick = null;
+        }
+
+        const envelope = document.getElementById('envelope');
+        envelope.onclick = openEnvelope;
+
+        setTimeout(() => {
+            if (!document.body.classList.contains('open')) {
+                openEnvelope();
+            }
+        }, 8000);
+    </script>
+</body>
+</html>
