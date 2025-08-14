@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pour toi, ma moitié de cœur ❤</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: #fff0f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Enveloppe stylisée */
+        .envelope {
+            width: 220px;
+            height: 140px;
+            background: #fff;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 3px;
+            z-index: 10;
+            transition: transform 0.3s;
+        }
+        
+        .envelope:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-left: 110px solid transparent;
+            border-right: 110px solid transparent;
+            border-top: 70px solid #f9f9f9;
+            transform-origin: top;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        /* Lettre avec poème complet */
+        .letter {
+            position: absolute;
+            width: 220px;
+            max-height: 70vh;
+            overflow-y: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 5;
+            line-height: 1.7;
+        }
+        
+        /* État ouvert */
+        .open .envelope {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+        
+        .open .envelope:before {
+            transform: rotateX(180deg);
+        }
+        
+        .open .letter {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        /* Style du poème */
+        .poem-container {
+            text-align: center;
+        }
+        
+        .poem-line {
+            margin: 12px 0;
+            font-style: italic;
+            color: #555;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .signature {
+            text-align: right;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 22px;
+            color: #e67b9b;
+            margin-top: 25px;
+            opacity: 0;
+        }
+        
+        /* Étoiles magiques */
+        .star {
+            position: absolute;
+            font-size: 18px;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            animation: float 4s ease-out forwards;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            20% { opacity: 1; transform: scale(1.3); }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope" id="envelope"></div>
+    
+    <div class="letter" id="letter">
+        <div class="poem-container">
+            <h3 style="color:#e67b9b;margin-bottom:20px;">Pour toi, ma moitié de cœur ✨</h3>
+            
+            <!-- POÈME COMPLET INTÉGRÉ -->
+            <div class="poem-line">Quand la vie est un vent qui sème le trouble,</div>
+            <div class="poem-line">Ton regard est un port où je me sens paisible. 🌊</div>
+            <div class="poem-line"><br></div>
+            <div class="poem-line">Tu es cette partie de moi qui ne ment jamais,</div>
+            <div class="poem-line">Un roc sur lequel je peux tout déposer. 💎</div>
+            <div class="poem-line"><br></div>
+            <div class="poem-line">Je te regarde et je sais que je suis chez moi,</div>
+            <div class="poem-line">Ma moitié de cœur, mon autre part de joie. 💖</div>
+            <div class="poem-line"><br></div>
+            <div class="poem-line">Le temps passe et les saisons se succèdent,</div>
+            <div class="poem-line">Mais notre histoire est un livre qui n'a pas de fin. 📖</div>
+            <div class="poem-line"><br></div>
+            <div class="poem-line">Tu es cette ancre solide, qui me tient dans la tempête,</div>
+            <div class="poem-line">Une main qui se tend, quand le monde s'arrête. ⚓</div>
+            <div class="poem-line"><br></div>
+            <div class="poem-line">Avec toi, je me sens complet, une âme en harmonie,</div>
+            <div class="poem-line">Tu es mon guide, ma moitié d'une même vie. 🌟</div>
+            
+            <div class="signature">Regas_king</div>
+        </div>
+    </div>
+
+    <!-- GSAP pour animations avancées -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelope = document.getElementById('envelope');
+            const letter = document.getElementById('letter');
+            const poemLines = document.querySelectorAll('.poem-line');
+            const signature = document.querySelector('.signature');
+            
+            // Ouvre l'enveloppe
+            function openEnvelope() {
+                // Animation de l'enveloppe
+                gsap.to(envelope, {
+                    opacity: 0,
+                    y: -30,
+                    duration: 0.8,
+                    ease: "power2.in"
+                });
+                
+                gsap.to(envelope.querySelector(':before'), {
+                    rotationX: 180,
+                    duration: 1,
+                    ease: "back.out"
+                });
+                
+                // Animation de la lettre
+                gsap.to(letter, {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1.2,
+                    ease: "elastic.out(1, 0.5)",
+                    onComplete: animatePoem
+                });
+                
+                createStars(15);
+            }
+            
+            // Anime le poème ligne par ligne
+            function animatePoem() {
+                gsap.to(poemLines, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "sine.out"
+                });
+                
+                gsap.to(signature, {
+                    opacity: 1,
+                    delay: poemLines.length * 0.15 + 0.5,
+                    duration: 1,
+                    ease: "power2.out"
+                });
+            }
+            
+            // Crée des étoiles magiques
+            function createStars(count) {
+                const stars = ['✦', '✧', '★', '☆', '✶', '✷', '✴', '✵'];
+                
+                for(let i = 0; i < count; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.textContent = stars[Math.floor(Math.random() * stars.length)];
+                    star.style.setProperty('--tx', ${(Math.random() - 0.5) * 200}px);
+                    star.style.setProperty('--ty', ${(Math.random() - 0.5) * 200}px);
+                    star.style.left = ${Math.random() * 100}vw;
+                    star.style.top = ${Math.random() * 100}vh;
+                    star.style.color = hsl(${Math.random() * 60 + 330}, 100%, 70%);
+                    star.style.animationDelay = ${i * 0.1}s;
+                    
+                    document.body.appendChild(star);
+                    
+                    // Nettoie après l'animation
+                    setTimeout(() => star.remove(), 4000);
+                }
+            }
+            
+            // Événements
+            envelope.addEventListener('click', openEnvelope);
+            
+            // Ouverture automatique après 10s
+            setTimeout(() => {
+                if(envelope.style.opacity !== '0') {
+                    openEnvelope();
+                }
+            }, 10000);
+        });
+    </script>
+</body>
+</html>
