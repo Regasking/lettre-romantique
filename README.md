@@ -1,2 +1,2 @@
 # lettre-romantique
-une lettre animee pour quelqu un de chere a mes yeux
+des lettre animee pour les gens chere a mes yeux
